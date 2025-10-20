@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capital Workspace</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #fafafa;
+            --text-primary: #0a0a0a;
+            --text-secondary: #666666;
+            --border: #e8e8e8;
+            --accent: #0a0a0a;
+            --hover: #f5f5f5;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        header {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.125rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .nav a:hover {
+            color: var(--text-primary);
+        }
+
+        .add-btn {
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            border: none;
+            transition: opacity 0.2s;
+        }
+
+        .add-btn:hover {
+            opacity: 0.85;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 3rem 6rem;
+        }
+
+        /* Filter Tabs */
+        .filters {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border);
+            overflow-x: auto;
+        }
+
+        .filter-tab {
+            padding: 0.75rem 0;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            background: none;
+            border: none;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+            margin-right: 2rem;
+        }
+
+        .filter-tab:hover {
+            color: var(--text-primary);
+        }
+
+        .filter-tab.active {
+            color: var(--text-primary);
+            border-bottom-color: var(--accent);
+        }
+
+        /* Search */
+        .search-container {
+            margin-bottom: 3rem;
+        }
+
+        .search-box {
+            width: 100%;
+            max-width: 600px;
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            background: var(--bg-primary);
+            transition: border-color 0.2s;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Card */
+        .card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.75rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .card-type {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .card-date {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+        }
+
+        .card-excerpt {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 0.8125rem;
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            background: var(--hover);
+            border-radius: 4px;
+        }
+
+        /* Link specific */
+        .link-card .card-title {
+            color: #0066cc;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .link-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Circular specific */
+        .circular-card {
+            border-left: 3px solid var(--accent);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 6rem 2rem;
+            color: var(--text-secondary);
+        }
+
+        .empty-state h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 1.25rem 1.5rem;
+            }
+
+            .container {
+                padding: 2rem 1.5rem 4rem;
+            }
+
+            .nav {
+                gap: 1.5rem;
+            }
+
+            .nav a:not(.add-btn) {
+                display: none;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .filter-tab {
+                margin-right: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">Capital Workspace</div>
+            <nav class="nav">
+                <a href="#all">All</a>
+                <a href="#ideas">Ideas</a>
+                <a href="#blog">Blog</a>
+                <a href="#learnings">Learnings</a>
+                <a href="#links">Links</a>
+                <a href="#circulars">Circulars</a>
+                <button class="add-btn">+ Add New</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Filters -->
+        <div class="filters">
+            <button class="filter-tab active" data-filter="all">All</button>
+            <button class="filter-tab" data-filter="ideas">Ideas</button>
+            <button class="filter-tab" data-filter="blog">Blog Posts</button>
+            <button class="filter-tab" data-filter="learnings">Learnings</button>
+            <button class="filter-tab" data-filter="links">Links</button>
+            <button class="filter-tab" data-filter="circulars">Circulars</button>
+        </div>
+
+        <!-- Search -->
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Search your workspace..." id="searchInput">
+        </div>
+
+        <!-- Grid -->
+        <div class="grid" id="contentGrid">
+            <!-- Idea Card -->
+            <div class="card" data-type="ideas">
+                <div class="card-header">
+                    <span class="card-type">Idea</span>
+                    <span class="card-date">Oct 20, 2025</span>
+                </div>
+                <h3 class="card-title">Personal Knowledge Management App</h3>
+                <p class="card-excerpt">Build a minimalist app for capturing and organizing ideas, with tagging, search, and cross-linking capabilities. Focus on speed and simplicity.</p>
+                <div class="card-tags">
+                    <span class="tag">product</span>
+                    <span class="tag">startup</span>
+                </div>
+            </div>
+
+            <!-- Blog Post Card -->
+            <div class="card" data-type="blog">
+                <div class="card-header">
+                    <span class="card-type">Blog Post</span>
+                    <span class="card-date">Oct 18, 2025</span>
+                </div>
+                <h3 class="card-title">Why Simple Design Wins</h3>
+                <p class="card-excerpt">Exploring the principles of minimalism in digital products. Less is more when every element serves a purpose. Clean interfaces reduce cognitive load...</p>
+                <div class="card-tags">
+                    <span class="tag">design</span>
+                    <span class="tag">writing</span>
+                </div>
+            </div>
+
+            <!-- Learning Card -->
+            <div class="card" data-type="learnings">
+                <div class="card-header">
+                    <span class="card-type">Learning</span>
+                    <span class="card-date">Oct 17, 2025</span>
+                </div>
+                <h3 class="card-title">CSS Grid Best Practices</h3>
+                <p class="card-excerpt">Learned about auto-fill vs auto-fit in CSS Grid. Auto-fill creates as many tracks as possible, while auto-fit collapses empty tracks. Use minmax() for responsive layouts.</p>
+                <div class="card-tags">
+                    <span class="tag">css</span>
+                    <span class="tag">frontend</span>
+                </div>
+            </div>
+
+            <!-- Link Card -->
+            <div class="card link-card" data-type="links">
+                <div class="card-header">
+                    <span class="card-type">Link</span>
+                    <span class="card-date">Oct 16, 2025</span>
+                </div>
+                <h3 class="card-title">
+                    <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                    </svg>
+                    Laws of UX
+                </h3>
+                <p class="card-excerpt">A collection of best practices that designers can consider when building user interfaces. Includes Fitts's Law, Hick's Law, and more.</p>
+                <div class="card-tags">
+                    <span class="tag">ux</span>
+                    <span class="tag">resource</span>
+                </div>
+            </div>
+
+            <!-- Circular Card -->
+            <div class="card circular-card" data-type="circulars">
+                <div class="card-header">
+                    <span class="card-type">Circular</span>
+                    <span class="card-date">Oct 15, 2025</span>
+                </div>
+                <h3 class="card-title">Q4 2025 Strategic Priorities</h3>
+                <p class="card-excerpt">Focus areas for the upcoming quarter: Product refinement, user research, and scaling infrastructure. Team to meet weekly for progress reviews.</p>
+                <div class="card-tags">
+                    <span class="tag">planning</span>
+                    <span class="tag">strategy</span>
+                </div>
+            </div>
+
+            <!-- Idea Card -->
+            <div class="card" data-type="ideas">
+                <div class="card-header">
+                    <span class="card-type">Idea</span>
+                    <span class="card-date">Oct 14, 2025</span>
+                </div>
+                <h3 class="card-title">Micro-SaaS for Content Creators</h3>
+                <p class="card-excerpt">A tool that helps YouTubers and podcasters repurpose their content across platforms. Automatic transcription, summarization, and social media formatting.</p>
+                <div class="card-tags">
+                    <span class="tag">saas</span>
+                    <span class="tag">content</span>
+                </div>
+            </div>
+
+            <!-- Blog Post Card -->
+            <div class="card" data-type="blog">
+                <div class="card-header">
+                    <span class="card-type">Blog Post</span>
+                    <span class="card-date">Oct 12, 2025</span>
+                </div>
+                <h3 class="card-title">Building in Public: Month 1</h3>
+                <p class="card-excerpt">First month of building Capital Workspace in public. Lessons learned about transparency, community feedback, and maintaining momentum during the early stages.</p>
+                <div class="card-tags">
+                    <span class="tag">buildinpublic</span>
+                    <span class="tag">journey</span>
+                </div>
+            </div>
+
+            <!-- Learning Card -->
+            <div class="card" data-type="learnings">
+                <div class="card-header">
+                    <span class="card-type">Learning</span>
+                    <span class="card-date">Oct 10, 2025</span>
+                </div>
+                <h3 class="card-title">JavaScript Async Patterns</h3>
+                <p class="card-excerpt">Deep dive into Promises, async/await, and error handling. Key insight: always handle promise rejections to avoid silent failures. Use try-catch with async/await.</p>
+                <div class="card-tags">
+                    <span class="tag">javascript</span>
+                    <span class="tag">async</span>
+                </div>
+            </div>
+
+            <!-- Link Card -->
+            <div class="card link-card" data-type="links">
+                <div class="card-header">
+                    <span class="card-type">Link</span>
+                    <span class="card-date">Oct 8, 2025</span>
+                </div>
+                <h3 class="card-title">
+                    <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                    </svg>
+                    Indie Hackers
+                </h3>
+                <p class="card-excerpt">Community of developers sharing their startup journeys, revenue numbers, and learnings. Great for finding inspiration and connecting with other builders.</p>
+                <div class="card-tags">
+                    <span class="tag">community</span>
+                    <span class="tag">startup</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Filter functionality
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const cards = document.querySelectorAll('.card');
+        const searchInput = document.getElementById('searchInput');
+
+        let currentFilter = 'all';
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Update active tab
+                filterTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                currentFilter = this.dataset.filter;
+                filterContent();
+            });
+        });
+
+        // Search functionality
+        searchInput.addEventListener('input', function() {
+            filterContent();
+        });
+
+        function filterContent() {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            cards.forEach(card => {
+                const cardType = card.dataset.type;
+                const title = card.querySelector('.card-title').textContent.toLowerCase();
+                const excerpt = card.querySelector('.card-excerpt').textContent.toLowerCase();
+                const tags = Array.from(card.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase());
+                
+                const matchesFilter = currentFilter === 'all' || cardType === currentFilter;
+                const matchesSearch = searchTerm === '' || 
+                    title.includes(searchTerm) || 
+                    excerpt.includes(searchTerm) ||
+                    tags.some(tag => tag.includes(searchTerm));
+                
+                if (matchesFilter && matchesSearch) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Add button functionality
+        document.querySelector('.add-btn').addEventListener('click', function() {
+            alert('Add new content functionality would go here. This could open a modal or navigate to a new page.');
+        });
+
+        // Card click
+        cards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                if (!e.target.closest('.tag')) {
+                    console.log('Opening:', this.querySelector('.card-title').textContent);
+                    // Navigate to full content view
+                }
+            });
+        });
+    </script>
+</body>
+</html>
