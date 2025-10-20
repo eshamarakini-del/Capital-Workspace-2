@@ -393,7 +393,8 @@
         // Initialize Supabase
         const SUPABASE_URL = 'https://qcyoukklhonwahklryyg.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFjeW91a2tsaG9ud2Foa2xyeXlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA3Nzc3MjcsImV4cCI6MjA3NjM1MzcyN30.ra7TCZHZJgcfGcEaQxLRtod-szjfPsMsexXSv_DPZAM';
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
 
         // Check if user is logged in
         const user = JSON.parse(localStorage.getItem('capitalWorkspaceUser') || '{}');
@@ -415,7 +416,7 @@
 
         // Logout function
         async function logout() {
-            await supabase.auth.signOut();
+            await supabaseClient.auth.signOut();
             localStorage.removeItem('capitalWorkspaceUser');
             window.location.href = 'login.html';
         }
