@@ -237,11 +237,11 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
-        // Initialize Supabase
+        // Initialize Supabase - using window.supabase from CDN
         const SUPABASE_URL = 'https://qcyoukklhonwahklryyg.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFjeW91a2tsaG9ud2Foa2xyeXlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA3Nzc3MjcsImV4cCI6MjA3NjM1MzcyN30.ra7TCZHZJgcfGcEaQxLRtod-szjfPsMsexXSv_DPZAM';
-        const { createClient } = supabase;
-        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
+        
+        const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         let isSignUp = false;
 
@@ -282,7 +282,6 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             
-            // Disable button and show loading state
             submitBtn.disabled = true;
             submitBtn.textContent = isSignUp ? 'Creating account...' : 'Signing in...';
             message.classList.remove('show');
@@ -291,32 +290,27 @@
                 let result;
                 
                 if (isSignUp) {
-                    // Sign up
-                    result = await supabaseClient.auth.signUp({
+                    result = await sb.auth.signUp({
                         email: email,
                         password: password
                     });
                     
                     if (result.error) throw result.error;
                     
-                    // Show success message
                     showMessage('Account created! You can now sign in.', 'success');
                     
-                    // Switch to sign in form
                     setTimeout(() => {
                         switchLink.click();
                     }, 1500);
                     
                 } else {
-                    // Sign in
-                    result = await supabaseClient.auth.signInWithPassword({
+                    result = await sb.auth.signInWithPassword({
                         email: email,
                         password: password
                     });
                     
                     if (result.error) throw result.error;
                     
-                    // Success - redirect to workspace
                     localStorage.setItem('capitalWorkspaceUser', JSON.stringify({ 
                         email: email,
                         userId: result.data.user.id 
@@ -336,9 +330,9 @@
             message.className = 'message show ' + type;
         }
 
-        // Check if user is already logged in
+        // Check if already logged in
         window.addEventListener('load', async function() {
-            const { data: { user } } = await supabaseClient.auth.getUser();
+            const { data: { user } } = await sb.auth.getUser();
             if (user) {
                 localStorage.setItem('capitalWorkspaceUser', JSON.stringify({ 
                     email: user.email,
