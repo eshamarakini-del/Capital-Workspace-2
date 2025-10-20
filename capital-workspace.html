@@ -50,58 +50,29 @@
         .logo {
             font-size: 1.125rem;
             font-weight: 500;
-            letter-spacing: -0.02em;
         }
 
-        .nav {
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .nav a {
-            color: var(--text-secondary);
-            text-decoration: none;
+        .user-info {
             font-size: 0.9375rem;
-            transition: color 0.2s;
+            color: var(--text-secondary);
         }
 
-        .nav a:hover {
-            color: var(--text-primary);
-        }
-
-        .add-btn {
-            background: var(--accent);
-            color: white;
-            padding: 0.5rem 1.25rem;
-            border-radius: 6px;
-            font-size: 0.875rem;
-            cursor: pointer;
-            border: none;
-            transition: opacity 0.2s;
-        }
-
-        .add-btn:hover {
-            opacity: 0.85;
-        }
-
-        /* Main Container */
+        /* Main */
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 3rem 3rem 6rem;
         }
 
-        /* Filter Tabs */
-        .filters {
+        /* Tabs */
+        .tabs {
             display: flex;
             gap: 0.5rem;
             margin-bottom: 3rem;
             border-bottom: 1px solid var(--border);
-            overflow-x: auto;
         }
 
-        .filter-tab {
+        .tab {
             padding: 0.75rem 0;
             font-size: 0.9375rem;
             color: var(--text-secondary);
@@ -110,167 +81,282 @@
             cursor: pointer;
             border-bottom: 2px solid transparent;
             transition: all 0.2s;
-            white-space: nowrap;
             margin-right: 2rem;
         }
 
-        .filter-tab:hover {
+        .tab:hover {
             color: var(--text-primary);
         }
 
-        .filter-tab.active {
+        .tab.active {
             color: var(--text-primary);
             border-bottom-color: var(--accent);
         }
 
-        /* Search */
-        .search-container {
-            margin-bottom: 3rem;
+        /* Tab Content */
+        .tab-content {
+            display: none;
         }
 
-        .search-box {
-            width: 100%;
-            max-width: 600px;
-            padding: 0.875rem 1rem;
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Blog Section */
+        .blog-editor {
+            background: var(--bg-primary);
             border: 1px solid var(--border);
             border-radius: 8px;
-            font-size: 0.9375rem;
-            background: var(--bg-primary);
-            transition: border-color 0.2s;
+            padding: 2rem;
+            margin-bottom: 2rem;
         }
 
-        .search-box:focus {
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .editor-header h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+
+        .save-btn {
+            padding: 0.5rem 1.25rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .save-btn:hover {
+            opacity: 0.85;
+        }
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9375rem;
+            font-family: inherit;
+            background: var(--bg-primary);
+            margin-bottom: 1rem;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus {
             outline: none;
             border-color: var(--accent);
         }
 
-        /* Grid */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 1.5rem;
+        textarea {
+            min-height: 300px;
+            resize: vertical;
         }
 
-        /* Card */
-        .card {
+        /* Blog List */
+        .blog-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .blog-item {
             background: var(--bg-primary);
             border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 1.75rem;
-            transition: all 0.2s;
+            padding: 1.5rem;
             cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .card:hover {
+        .blog-item:hover {
             border-color: var(--accent);
-            transform: translateY(-2px);
         }
 
-        .card-header {
+        .blog-item-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
         }
 
-        .card-type {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-
-        .card-date {
-            font-size: 0.8125rem;
-            color: var(--text-secondary);
-        }
-
-        .card-title {
+        .blog-item h3 {
             font-size: 1.125rem;
             font-weight: 500;
-            margin-bottom: 0.75rem;
-            line-height: 1.4;
-            letter-spacing: -0.01em;
+            margin-bottom: 0.5rem;
         }
 
-        .card-excerpt {
+        .blog-item-date {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .blog-item-excerpt {
+            color: var(--text-secondary);
             font-size: 0.9375rem;
-            color: var(--text-secondary);
             line-height: 1.6;
-            margin-bottom: 1rem;
         }
 
-        .card-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            font-size: 0.8125rem;
+        .delete-btn {
+            background: none;
+            border: none;
             color: var(--text-secondary);
-            padding: 0.25rem 0.75rem;
-            background: var(--hover);
-            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            padding: 0.25rem 0.5rem;
         }
 
-        /* Link specific */
-        .link-card .card-title {
-            color: #0066cc;
+        .delete-btn:hover {
+            color: #dc2626;
+        }
+
+        /* Repository Section */
+        .repo-add {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .repo-add h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .repo-form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .repo-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .repo-item {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            justify-content: space-between;
+            align-items: flex-start;
         }
 
-        .link-icon {
-            width: 16px;
-            height: 16px;
+        .repo-item-content h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
         }
 
-        /* Circular specific */
-        .circular-card {
+        .repo-item-link {
+            color: #0066cc;
+            font-size: 0.875rem;
+            text-decoration: none;
+            word-break: break-all;
+        }
+
+        .repo-item-link:hover {
+            text-decoration: underline;
+        }
+
+        .repo-item-note {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Reminders Section */
+        .reminder-add {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .reminder-add h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .reminder-form {
+            display: grid;
+            gap: 1rem;
+        }
+
+        input[type="date"] {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9375rem;
+            font-family: inherit;
+        }
+
+        .reminder-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .reminder-item {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
             border-left: 3px solid var(--accent);
+            border-radius: 8px;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .reminder-item.urgent {
+            border-left-color: #dc2626;
+            background: #fef2f2;
+        }
+
+        .reminder-item-content h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .reminder-item-date {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .reminder-item.urgent .reminder-item-date {
+            color: #dc2626;
+            font-weight: 500;
         }
 
         /* Empty State */
         .empty-state {
             text-align: center;
-            padding: 6rem 2rem;
+            padding: 4rem 2rem;
             color: var(--text-secondary);
-        }
-
-        .empty-state h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .header-content {
-                padding: 1.25rem 1.5rem;
-            }
-
+            .header-content,
             .container {
-                padding: 2rem 1.5rem 4rem;
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
             }
 
-            .nav {
-                gap: 1.5rem;
-            }
-
-            .nav a:not(.add-btn) {
-                display: none;
-            }
-
-            .grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .filter-tab {
-                margin-right: 1.5rem;
+            .tab {
+                margin-right: 1rem;
             }
         }
     </style>
@@ -279,237 +365,274 @@
     <header>
         <div class="header-content">
             <div class="logo">Capital Workspace</div>
-            <nav class="nav">
-                <a href="#all">All</a>
-                <a href="#ideas">Ideas</a>
-                <a href="#blog">Blog</a>
-                <a href="#learnings">Learnings</a>
-                <a href="#links">Links</a>
-                <a href="#circulars">Circulars</a>
-                <button class="add-btn">+ Add New</button>
-            </nav>
+            <div class="user-info" id="userEmail"></div>
         </div>
     </header>
 
     <div class="container">
-        <!-- Filters -->
-        <div class="filters">
-            <button class="filter-tab active" data-filter="all">All</button>
-            <button class="filter-tab" data-filter="ideas">Ideas</button>
-            <button class="filter-tab" data-filter="blog">Blog Posts</button>
-            <button class="filter-tab" data-filter="learnings">Learnings</button>
-            <button class="filter-tab" data-filter="links">Links</button>
-            <button class="filter-tab" data-filter="circulars">Circulars</button>
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" data-tab="blog">Blog</button>
+            <button class="tab" data-tab="repository">Repository</button>
+            <button class="tab" data-tab="reminders">Reminders</button>
         </div>
 
-        <!-- Search -->
-        <div class="search-container">
-            <input type="text" class="search-box" placeholder="Search your workspace..." id="searchInput">
+        <!-- Blog Tab -->
+        <div class="tab-content active" id="blog">
+            <div class="blog-editor">
+                <div class="editor-header">
+                    <h2>Write New Blog Post</h2>
+                    <button class="save-btn" onclick="saveBlog()">Save Post</button>
+                </div>
+                <input type="text" id="blogTitle" placeholder="Blog Title">
+                <textarea id="blogContent" placeholder="Write your blog post here..."></textarea>
+            </div>
+
+            <h3 style="margin-bottom: 1rem; font-weight: 500;">Your Blog Posts</h3>
+            <div class="blog-list" id="blogList"></div>
         </div>
 
-        <!-- Grid -->
-        <div class="grid" id="contentGrid">
-            <!-- Idea Card -->
-            <div class="card" data-type="ideas">
-                <div class="card-header">
-                    <span class="card-type">Idea</span>
-                    <span class="card-date">Oct 20, 2025</span>
-                </div>
-                <h3 class="card-title">Personal Knowledge Management App</h3>
-                <p class="card-excerpt">Build a minimalist app for capturing and organizing ideas, with tagging, search, and cross-linking capabilities. Focus on speed and simplicity.</p>
-                <div class="card-tags">
-                    <span class="tag">product</span>
-                    <span class="tag">startup</span>
+        <!-- Repository Tab -->
+        <div class="tab-content" id="repository">
+            <div class="repo-add">
+                <h2>Add to Repository</h2>
+                <div class="repo-form">
+                    <input type="text" id="repoTitle" placeholder="Title">
+                    <input type="text" id="repoLink" placeholder="Link (optional)">
+                    <textarea id="repoNote" placeholder="Notes..." style="min-height: 100px;"></textarea>
+                    <button class="save-btn" onclick="saveRepo()">Add to Repository</button>
                 </div>
             </div>
 
-            <!-- Blog Post Card -->
-            <div class="card" data-type="blog">
-                <div class="card-header">
-                    <span class="card-type">Blog Post</span>
-                    <span class="card-date">Oct 18, 2025</span>
-                </div>
-                <h3 class="card-title">Why Simple Design Wins</h3>
-                <p class="card-excerpt">Exploring the principles of minimalism in digital products. Less is more when every element serves a purpose. Clean interfaces reduce cognitive load...</p>
-                <div class="card-tags">
-                    <span class="tag">design</span>
-                    <span class="tag">writing</span>
+            <h3 style="margin-bottom: 1rem; font-weight: 500;">Repository Items</h3>
+            <div class="repo-list" id="repoList"></div>
+        </div>
+
+        <!-- Reminders Tab -->
+        <div class="tab-content" id="reminders">
+            <div class="reminder-add">
+                <h2>Add Reminder</h2>
+                <div class="reminder-form">
+                    <input type="text" id="reminderTitle" placeholder="What do you need to remember?">
+                    <input type="date" id="reminderDate">
+                    <button class="save-btn" onclick="saveReminder()">Add Reminder</button>
                 </div>
             </div>
 
-            <!-- Learning Card -->
-            <div class="card" data-type="learnings">
-                <div class="card-header">
-                    <span class="card-type">Learning</span>
-                    <span class="card-date">Oct 17, 2025</span>
-                </div>
-                <h3 class="card-title">CSS Grid Best Practices</h3>
-                <p class="card-excerpt">Learned about auto-fill vs auto-fit in CSS Grid. Auto-fill creates as many tracks as possible, while auto-fit collapses empty tracks. Use minmax() for responsive layouts.</p>
-                <div class="card-tags">
-                    <span class="tag">css</span>
-                    <span class="tag">frontend</span>
-                </div>
-            </div>
-
-            <!-- Link Card -->
-            <div class="card link-card" data-type="links">
-                <div class="card-header">
-                    <span class="card-type">Link</span>
-                    <span class="card-date">Oct 16, 2025</span>
-                </div>
-                <h3 class="card-title">
-                    <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                    </svg>
-                    Laws of UX
-                </h3>
-                <p class="card-excerpt">A collection of best practices that designers can consider when building user interfaces. Includes Fitts's Law, Hick's Law, and more.</p>
-                <div class="card-tags">
-                    <span class="tag">ux</span>
-                    <span class="tag">resource</span>
-                </div>
-            </div>
-
-            <!-- Circular Card -->
-            <div class="card circular-card" data-type="circulars">
-                <div class="card-header">
-                    <span class="card-type">Circular</span>
-                    <span class="card-date">Oct 15, 2025</span>
-                </div>
-                <h3 class="card-title">Q4 2025 Strategic Priorities</h3>
-                <p class="card-excerpt">Focus areas for the upcoming quarter: Product refinement, user research, and scaling infrastructure. Team to meet weekly for progress reviews.</p>
-                <div class="card-tags">
-                    <span class="tag">planning</span>
-                    <span class="tag">strategy</span>
-                </div>
-            </div>
-
-            <!-- Idea Card -->
-            <div class="card" data-type="ideas">
-                <div class="card-header">
-                    <span class="card-type">Idea</span>
-                    <span class="card-date">Oct 14, 2025</span>
-                </div>
-                <h3 class="card-title">Micro-SaaS for Content Creators</h3>
-                <p class="card-excerpt">A tool that helps YouTubers and podcasters repurpose their content across platforms. Automatic transcription, summarization, and social media formatting.</p>
-                <div class="card-tags">
-                    <span class="tag">saas</span>
-                    <span class="tag">content</span>
-                </div>
-            </div>
-
-            <!-- Blog Post Card -->
-            <div class="card" data-type="blog">
-                <div class="card-header">
-                    <span class="card-type">Blog Post</span>
-                    <span class="card-date">Oct 12, 2025</span>
-                </div>
-                <h3 class="card-title">Building in Public: Month 1</h3>
-                <p class="card-excerpt">First month of building Capital Workspace in public. Lessons learned about transparency, community feedback, and maintaining momentum during the early stages.</p>
-                <div class="card-tags">
-                    <span class="tag">buildinpublic</span>
-                    <span class="tag">journey</span>
-                </div>
-            </div>
-
-            <!-- Learning Card -->
-            <div class="card" data-type="learnings">
-                <div class="card-header">
-                    <span class="card-type">Learning</span>
-                    <span class="card-date">Oct 10, 2025</span>
-                </div>
-                <h3 class="card-title">JavaScript Async Patterns</h3>
-                <p class="card-excerpt">Deep dive into Promises, async/await, and error handling. Key insight: always handle promise rejections to avoid silent failures. Use try-catch with async/await.</p>
-                <div class="card-tags">
-                    <span class="tag">javascript</span>
-                    <span class="tag">async</span>
-                </div>
-            </div>
-
-            <!-- Link Card -->
-            <div class="card link-card" data-type="links">
-                <div class="card-header">
-                    <span class="card-type">Link</span>
-                    <span class="card-date">Oct 8, 2025</span>
-                </div>
-                <h3 class="card-title">
-                    <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                    </svg>
-                    Indie Hackers
-                </h3>
-                <p class="card-excerpt">Community of developers sharing their startup journeys, revenue numbers, and learnings. Great for finding inspiration and connecting with other builders.</p>
-                <div class="card-tags">
-                    <span class="tag">community</span>
-                    <span class="tag">startup</span>
-                </div>
-            </div>
+            <h3 style="margin-bottom: 1rem; font-weight: 500;">Upcoming Reminders</h3>
+            <div class="reminder-list" id="reminderList"></div>
         </div>
     </div>
 
     <script>
-        // Filter functionality
-        const filterTabs = document.querySelectorAll('.filter-tab');
-        const cards = document.querySelectorAll('.card');
-        const searchInput = document.getElementById('searchInput');
+        // Check if user is logged in
+        const user = JSON.parse(localStorage.getItem('capitalWorkspaceUser') || '{}');
+        if (!user.email) {
+            window.location.href = 'login.html';
+        }
+        document.getElementById('userEmail').textContent = user.email;
 
-        let currentFilter = 'all';
+        // Initialize data
+        let blogs = JSON.parse(localStorage.getItem('blogs') || '[]');
+        let repos = JSON.parse(localStorage.getItem('repos') || '[]');
+        let reminders = JSON.parse(localStorage.getItem('reminders') || '[]');
 
-        filterTabs.forEach(tab => {
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
-                // Update active tab
-                filterTabs.forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
                 this.classList.add('active');
-                
-                currentFilter = this.dataset.filter;
-                filterContent();
+                document.getElementById(this.dataset.tab).classList.add('active');
             });
         });
 
-        // Search functionality
-        searchInput.addEventListener('input', function() {
-            filterContent();
-        });
-
-        function filterContent() {
-            const searchTerm = searchInput.value.toLowerCase();
+        // Blog functions
+        function saveBlog() {
+            const title = document.getElementById('blogTitle').value;
+            const content = document.getElementById('blogContent').value;
             
-            cards.forEach(card => {
-                const cardType = card.dataset.type;
-                const title = card.querySelector('.card-title').textContent.toLowerCase();
-                const excerpt = card.querySelector('.card-excerpt').textContent.toLowerCase();
-                const tags = Array.from(card.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase());
-                
-                const matchesFilter = currentFilter === 'all' || cardType === currentFilter;
-                const matchesSearch = searchTerm === '' || 
-                    title.includes(searchTerm) || 
-                    excerpt.includes(searchTerm) ||
-                    tags.some(tag => tag.includes(searchTerm));
-                
-                if (matchesFilter && matchesSearch) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+            if (!title || !content) {
+                alert('Please fill in both title and content');
+                return;
+            }
+            
+            const blog = {
+                id: Date.now(),
+                title,
+                content,
+                date: new Date().toISOString()
+            };
+            
+            blogs.unshift(blog);
+            localStorage.setItem('blogs', JSON.stringify(blogs));
+            
+            document.getElementById('blogTitle').value = '';
+            document.getElementById('blogContent').value = '';
+            
+            renderBlogs();
         }
 
-        // Add button functionality
-        document.querySelector('.add-btn').addEventListener('click', function() {
-            alert('Add new content functionality would go here. This could open a modal or navigate to a new page.');
-        });
+        function renderBlogs() {
+            const blogList = document.getElementById('blogList');
+            
+            if (blogs.length === 0) {
+                blogList.innerHTML = '<div class="empty-state">No blog posts yet. Write your first one!</div>';
+                return;
+            }
+            
+            blogList.innerHTML = blogs.map(blog => `
+                <div class="blog-item">
+                    <div class="blog-item-header">
+                        <div>
+                            <h3>${blog.title}</h3>
+                            <div class="blog-item-date">${new Date(blog.date).toLocaleDateString()}</div>
+                        </div>
+                        <button class="delete-btn" onclick="deleteBlog(${blog.id})">Delete</button>
+                    </div>
+                    <div class="blog-item-excerpt">${blog.content.substring(0, 200)}${blog.content.length > 200 ? '...' : ''}</div>
+                </div>
+            `).join('');
+        }
 
-        // Card click
-        cards.forEach(card => {
-            card.addEventListener('click', function(e) {
-                if (!e.target.closest('.tag')) {
-                    console.log('Opening:', this.querySelector('.card-title').textContent);
-                    // Navigate to full content view
-                }
-            });
-        });
+        function deleteBlog(id) {
+            if (confirm('Delete this blog post?')) {
+                blogs = blogs.filter(b => b.id !== id);
+                localStorage.setItem('blogs', JSON.stringify(blogs));
+                renderBlogs();
+            }
+        }
+
+        // Repository functions
+        function saveRepo() {
+            const title = document.getElementById('repoTitle').value;
+            const link = document.getElementById('repoLink').value;
+            const note = document.getElementById('repoNote').value;
+            
+            if (!title) {
+                alert('Please enter a title');
+                return;
+            }
+            
+            const repo = {
+                id: Date.now(),
+                title,
+                link,
+                note,
+                date: new Date().toISOString()
+            };
+            
+            repos.unshift(repo);
+            localStorage.setItem('repos', JSON.stringify(repos));
+            
+            document.getElementById('repoTitle').value = '';
+            document.getElementById('repoLink').value = '';
+            document.getElementById('repoNote').value = '';
+            
+            renderRepos();
+        }
+
+        function renderRepos() {
+            const repoList = document.getElementById('repoList');
+            
+            if (repos.length === 0) {
+                repoList.innerHTML = '<div class="empty-state">No repository items yet. Add your first one!</div>';
+                return;
+            }
+            
+            repoList.innerHTML = repos.map(repo => `
+                <div class="repo-item">
+                    <div class="repo-item-content">
+                        <h3>${repo.title}</h3>
+                        ${repo.link ? `<a href="${repo.link}" class="repo-item-link" target="_blank">${repo.link}</a>` : ''}
+                        ${repo.note ? `<div class="repo-item-note">${repo.note}</div>` : ''}
+                    </div>
+                    <button class="delete-btn" onclick="deleteRepo(${repo.id})">Delete</button>
+                </div>
+            `).join('');
+        }
+
+        function deleteRepo(id) {
+            if (confirm('Delete this item?')) {
+                repos = repos.filter(r => r.id !== id);
+                localStorage.setItem('repos', JSON.stringify(repos));
+                renderRepos();
+            }
+        }
+
+        // Reminder functions
+        function saveReminder() {
+            const title = document.getElementById('reminderTitle').value;
+            const date = document.getElementById('reminderDate').value;
+            
+            if (!title || !date) {
+                alert('Please fill in both title and date');
+                return;
+            }
+            
+            const reminder = {
+                id: Date.now(),
+                title,
+                date
+            };
+            
+            reminders.push(reminder);
+            reminders.sort((a, b) => new Date(a.date) - new Date(b.date));
+            localStorage.setItem('reminders', JSON.stringify(reminders));
+            
+            document.getElementById('reminderTitle').value = '';
+            document.getElementById('reminderDate').value = '';
+            
+            renderReminders();
+        }
+
+        function renderReminders() {
+            const reminderList = document.getElementById('reminderList');
+            
+            if (reminders.length === 0) {
+                reminderList.innerHTML = '<div class="empty-state">No reminders yet. Add your first one!</div>';
+                return;
+            }
+            
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            reminderList.innerHTML = reminders.map(reminder => {
+                const reminderDate = new Date(reminder.date);
+                const daysUntil = Math.ceil((reminderDate - today) / (1000 * 60 * 60 * 24));
+                const isUrgent = daysUntil <= 7 && daysUntil >= 0;
+                
+                let dateText = reminderDate.toLocaleDateString();
+                if (daysUntil === 0) dateText = 'Today!';
+                else if (daysUntil === 1) dateText = 'Tomorrow';
+                else if (daysUntil > 0 && daysUntil <= 7) dateText = `In ${daysUntil} days`;
+                else if (daysUntil < 0) dateText = `${Math.abs(daysUntil)} days ago (overdue)`;
+                
+                return `
+                    <div class="reminder-item ${isUrgent || daysUntil < 0 ? 'urgent' : ''}">
+                        <div class="reminder-item-content">
+                            <h3>${reminder.title}</h3>
+                            <div class="reminder-item-date">${dateText} - ${reminderDate.toLocaleDateString()}</div>
+                        </div>
+                        <button class="delete-btn" onclick="deleteReminder(${reminder.id})">Delete</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function deleteReminder(id) {
+            if (confirm('Delete this reminder?')) {
+                reminders = reminders.filter(r => r.id !== id);
+                localStorage.setItem('reminders', JSON.stringify(reminders));
+                renderReminders();
+            }
+        }
+
+        // Initial render
+        renderBlogs();
+        renderRepos();
+        renderReminders();
     </script>
 </body>
 </html>
